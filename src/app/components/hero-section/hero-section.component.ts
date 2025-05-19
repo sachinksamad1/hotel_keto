@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { Component } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-hero-section',
@@ -9,64 +9,43 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./hero-section.component.scss'],
   imports: [
     CommonModule,
-    CarouselModule,
-    FormsModule,
+    MatIconModule
   ],
 })
-export class HeroSectionComponent implements OnInit {
-  carouselOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: true,
-    navSpeed: 700,
-    navText: ['', ''],
-    autoplay: true,
-    autoplayTimeout: 5000, // Adjust as needed
-    autoplayHoverPause: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
-      }
+export class HeroSectionComponent implements OnInit, OnDestroy {
+    images = [
+    {
+      url: 'images/banner1.jpg',
+      alt: 'Hero Image 1'
     },
-    nav: false // Set to true if you want navigation arrows
-  };
-
-  carouselImages: string[] = [
-    '/images/banner1.jpg', 
-    '/images/banner2.jpg',
-    '/images/banner3.jpg'
+    {
+      url: '/images/banner2.jpg',
+      alt: 'Hero Image 2'
+    },
+    {
+      url: '/images/banner3.jpg',
+      alt: 'Hero Image 3'
+    }
   ];
+  currentIndex = 0;
 
-  formData = {
-    name: '',
-    email: '',
-    message: ''
-  };
-
-  constructor() { }
-
-  ngOnInit(): void {
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 
-  onSubmit() {
-    // Handle form submission logic here
-    console.log('Form submitted:', this.formData);
-    // Reset the form after submission
-    this.formData = {
-      name: '',
-      email: '',
-      message: ''
-    };
+  prevSlide() {
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+    intervalId: any;
+
+  ngOnInit() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // change slide every 5 seconds
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }

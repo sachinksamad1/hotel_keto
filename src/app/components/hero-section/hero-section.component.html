@@ -1,27 +1,14 @@
-<div class="hero-section">
-  <owl-carousel-o [options]="carouselOptions">
-    <ng-template carouselSlide *ngFor="let image of carouselImages">
-      <div class="slide-item" [style.backgroundImage]="'url(' + image + ')'">
-      </div>
-    </ng-template>
-  </owl-carousel-o>
+<div class="carousel-container">
+  <div class="carousel-slide" *ngIf="images.length">
+    <img [src]="images[currentIndex].url" [alt]="images[currentIndex].alt" />
+  </div>
 
- <div class="form-container">
-    <h2>Get in Touch</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" [(ngModel)]="formData.email" required email>
-      </div>
-      <div class="form-group">
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" [(ngModel)]="formData.message"></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+  <div class="carousel-controls">
+    <button mat-icon-button (click)="prevSlide()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-icon-button (click)="nextSlide()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
   </div>
 </div>
