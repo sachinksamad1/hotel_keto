@@ -1,0 +1,37 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px; /* Adjust padding as needed */
+  background-color: #f8f8f8; /* Optional background color */
+}
+
+.logo img {
+  height: 40px; /* Adjust logo height as needed */
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px; /* Spacing between links */
+}
+
+.nav-links li:first-child {
+  margin-left: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333; /* Link text color */
+  font-weight: bold;
+  font-size: 16px; /* Adjust font size */
+}
+
+.nav-links a.active {
+  color: red; /* Active link color */
+}
